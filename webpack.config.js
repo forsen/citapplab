@@ -7,7 +7,7 @@ const config = {
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'lib'),
-    filename: libraryName + '.bundle.js',
+    filename: 'bundle.js',
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true
