@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- node
+script: npm run travis-test
+after_success: npm run report-coverage
+
+before_deploy: webpack
+deploy:
+  provider: npm
+  email: npm@mail.forsen.no
+  api_key:
+    secure: TH6yCyEKFDTnJ2QKoO4S0mY4lj4HlGJQfYKuekuu1F7jR0XBzJQJVpCOD/bnliJA1ml18+BPganbniixyqRWzmnNVDIf/FvPhlTCKFwh73WZANm1boItgveoxoegVRMcMJZRKSB4JUL3snj7fAFG5XZ0HnO+GQ0Xe+4sddIpm4bJt2z8dbtbkTTaqq77a3fWWybYPtajiFNRbEujPRf1rqKGVnIg5PsmoHj19IuMSegm01f5DQ9HvP/W6AOeFiTY0z5L9w0gLrXdHbHYvmBZE+yUxJkFBdAU/i9Smls8DmRcZXdNQkvFENfjIZR9MwGNhTDV+Jv21Y1bsZ3MLPDI/KipOBgIsjb+atjE0huW6vw9zvbK64hUiPSb7Yi1ve3ECk5C15m+0Z3yAgZpiO+ziWfmhSXhPMj62krGMUuGNWS6Ha3lNqlKjuu7yWpskwibsg15o8H7zzeDv4WYA9YNiL+4JsiXb+7UEKTn4Po6wNBI80XuYiK49Cr6Ez4W885Mxhxn4lmWsMjnc9VKnr4QxL3XEimMZfBBNI1HYryV/T60vbTaxVnB7NZooUrH37X9GOSEcDSIhf1H1bgvfK24Z8F/ZnldNDzRZcuAUUP/DtVes+xRJ97QKhmvUP3PEtsIAT9NcGSL0ZOdEkdKrZo71crf7TC5/JmJi9fwVmwGssw=
+  on:
+    tags: true
+    repo: forsen/citapplab
+  skip_cleanup: true
