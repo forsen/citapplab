@@ -3,7 +3,6 @@ node_js:
 - node
 script: npm run travis-test
 after_success: npm run report-coverage
-
 before_deploy: webpack
 deploy:
   provider: npm
@@ -14,3 +13,6 @@ deploy:
     tags: true
     repo: forsen/citapplab
   skip_cleanup: true
+env:
+  global:
+    secure: AQUckR3pWGlCXxLCz21JFUQgNnshCiBMQqghYPmXtcLQdr5n5eTrVEmp1uvDpca/AzV8Ne1TCVZFwZsk4Wer1s3UN4dP1742X78h6dKBJdKv5tKX2xzG/FHiiepNfaelq55l/jwYQkZSLJa/NvjzyE7LpVzCAFIetZ6o0bw/+vcP7v5dSHI2X76D0vv47LCJt7WmMMmMI2sgiZqxR/P+oSBX/XdxupmbTgPhpGmnA6+kuodNdPK7OARrZ/78KMS2ab9PSUWuLZyxaPC2nKX+HtuLWvKgfeIezvPYyXyPBf2Cnw2iZ5EFjV+jhARmsjbFNDEMiHuuxIQaD9kF5CwIbYODOhNLrl7KGwlV3J70rq1pOU99A3iSQzLeT0ttcCkEI++jXTnUv1QdnQIdG5gq/D7HaMW71qka+LEBANqeQHzGiaO+FO/gTTU6dqYwL0IIp7k8JYVetXN/ffeKnQQcSdRxBcGZcmmOEfvCP3te8Kknu1P6Y531Mwd50FI0578fH7UNy9vbCnSun/mWLbiGa3eLVdJW+1le0xAZanMyktgu/n5U4N5Y7xK2GaoHe0J/tgAgVBt+L/TZFgrTyD9uPMwByKV70/BrHE95osisv1cvIz2qTn6HjTbGp4Qa9aLqJCmbWUqKcsTwUi8bDjooj/obyfPqnI52/sPcAY1tGUI=
