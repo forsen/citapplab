@@ -38,3 +38,6 @@ jspm_packages
 
 # Project files
 .idea/
+
+# Webpack bundle dir
+lib/
