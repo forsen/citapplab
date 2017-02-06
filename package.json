@@ -8,7 +8,7 @@
     "dev": "webpack --progress --colors --watch",
     "test": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "travis-test": "nyc --require babel-core/register mocha ./test/*.spec.js",
-    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov -t CODECOV_API_KEY"
+    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov -t $CODECOV_API_KEY"
   },
   "repository": {
     "type": "git",

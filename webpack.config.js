@@ -21,9 +21,14 @@ const config = {
       },
       {
         test: /\.js$/,
-        use: 'eslint-loader'
+        use: 'eslint-loader',
+        exclude: /node_modules/
       }
     ]
+  },
+  resolve: {
+    modules: [path.resolve('./src')],
+    extensions: ['.js']
   }
 }
 
