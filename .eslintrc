@@ -4,6 +4,7 @@
     },
     "extends": ["standard"],
     "env":{
-        "mocha": true
+        "mocha": true,
+        "browser": true
     }
 }
