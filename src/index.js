@@ -1,8 +1,6 @@
+const {fetch} = require('fetch-ponyfill')({})
 
 export const verify = () => {
-  console.log(fetch('http://google.no')
-    .then((result) => result.json())
-    .then((result) => console.log(result)))
-  return fetch !== undefined
+  return fetch('https://data.smartbydata.no/api/action/datastore_search?resource_id=56c2c722-5594-4005-ad92-d4e667b67663&limit=5')
 }
 

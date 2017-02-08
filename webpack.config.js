@@ -25,10 +25,6 @@ const config = {
         exclude: /node_modules/
       }
     ]
-  },
-  resolve: {
-    modules: [path.resolve('./src')],
-    extensions: ['.js']
   }
 }
 

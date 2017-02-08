@@ -35,5 +35,8 @@
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
     "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "fetch-ponyfill": "^3.0.2"
   }
 }
