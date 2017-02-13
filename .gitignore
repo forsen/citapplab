@@ -40,5 +40,5 @@ jspm_packages
 .idea/
 
 # Webpack bundle dir
-lib/
+/lib/
 /coverage.lcov
