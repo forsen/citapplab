@@ -1,6 +1,16 @@
-const {fetch} = require('fetch-ponyfill')({})
+import {
+  hostIsCkan,
+  resolveUrl as ckanResolveUrl
+} from './lib/ckan'
 
-export const verify = () => {
-  return fetch('https://data.smartbydata.no/api/action/datastore_search?resource_id=56c2c722-5594-4005-ad92-d4e667b67663&limit=5')
+const { fetch } = require('fetch-ponyfill')({})
+
+const verify = (url) => {
+  return fetch(url)
 }
 
+export {
+  ckanResolveUrl,
+  hostIsCkan,
+  verify
+}
