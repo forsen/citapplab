@@ -42,3 +42,4 @@ jspm_packages
 # Webpack bundle dir
 /lib/
 /coverage.lcov
+content
