@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack --progress --colors --watch",
-    "test": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
-    "travis-test": "nyc --require babel-core/register mocha ./test/*.spec.js",
+    "test": "mocha --compilers js:babel-core/register --colors -w --recursive ./test/",
+    "travis-test": "nyc --require babel-core/register mocha --recursive ./test/",
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov -t $CODECOV_API_KEY"
   },
   "repository": {
