@@ -16,7 +16,16 @@ describe('CKAN tests', function () {
     const expected = 'https://data.smartbydata.no/api/action/datastore_search'
     expect(ckanResolveUrl(host)).to.equal(expected)
   })
-  it('just testing', () => {
+  it('Verify host is valid', () => {
     return hostIsCkan('https://data.smartbydata.no')
+  })
+  it('Verify host is invalid', () => {
+    return hostIsCkan('https://google.no')
+      .then(() => {
+        throw new Error('not supposed to succeed')
+      })
+      .catch((m) => {
+        expect(m).to.equal('not a valid ckan host')
+      })
   })
 })
