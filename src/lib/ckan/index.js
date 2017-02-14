@@ -1,6 +1,7 @@
-import { hostIsCkan, resolveUrl } from './url'
+import { getEndpoint } from './url'
+import { verify } from './verify'
 
 export {
-  hostIsCkan,
-  resolveUrl
+  getEndpoint,
+  verify
 }
