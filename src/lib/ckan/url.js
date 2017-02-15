@@ -11,3 +11,7 @@ export const getEndpoint = ( host ) => {
 export const getActionEndpoint = ( host ) => {
   return getEndpoint(host).concat('/action')
 }
+
+export const resolveURL = ( url ) => {
+  return getEndpoint(url)
+}

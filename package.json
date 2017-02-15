@@ -37,7 +37,6 @@
     "webpack": "2.2.1"
   },
   "dependencies": {
-    "fetch-intercept": "2.2.1",
-    "fetch-ponyfill": "3.0.2"
+    "fetch-ponyfill": "^3.0.2"
   }
 }
