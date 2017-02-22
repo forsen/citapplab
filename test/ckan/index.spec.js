@@ -21,8 +21,8 @@ describe('CKAN Module tests', () => {
       .then(() => {
         throw new Error('not supposed to succeed')
       })
-      .catch((message) => {
-        expect(message).to.equal('not a valid ckan host')
+      .catch((error) => {
+        expect(error.message).to.equal('not a valid ckan host')
       })
   })
 })
