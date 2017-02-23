@@ -1,3 +1,0 @@
-const response = {
-  success: true
-}
