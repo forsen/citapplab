@@ -1,15 +1,16 @@
-import { getEndpoint } from './url'
-
-export const get = (host, header, data) => {
-  return fetch(host, data)
+const Verifier = () => {
+  return {
+    verify (fetch, url) {
+      return fetch(url + '/api/3')
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error('not a valid ckan endpoint')
+          }
+        })
+    }
+  }
 }
 
-export const verify = (host) => {
-  const url = getEndpoint(host)
-  return fetch(url)
-    .then((result) => {
-      if (result.status !== 200) {
-        throw new Error('not a valid ckan host')
-      }
-    })
+export {
+  Verifier
 }

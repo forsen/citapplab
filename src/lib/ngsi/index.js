@@ -1,21 +1,12 @@
-import { get } from '../utils'
+import Get from '../utils'
+import { Query } from './actions'
 
-const query = (state) => ({
-  query: () => {
-    return new Promise((resolve) => {
-      get(state.url)
-        .then((response) => response.json())
-        .then((jsonData) => resolve(jsonData))
-    })
-  }
-})
+const get = Get()
 
-const ngsi = (url, options) => {
-  let state = {
-    url,
-    options
-  }
-  return Object.assign({}, query(state))
+const query = Query()
+
+const ngsi = () => {
+  return Object.assign({}, query, get)
 }
 
 export default ngsi

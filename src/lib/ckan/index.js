@@ -1,9 +1,8 @@
 import { resolveURL } from './url'
-import { verify } from './get'
+import { Verifier } from './get'
 
-const ckan = {
-  resolveURL,
-  verify
-}
+const verify = Verifier()
+
+const ckan = Object.assign({}, resolveURL, verify)
 
 export default ckan

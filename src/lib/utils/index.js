@@ -1,5 +1,7 @@
-const { fetch } = require('fetch-ponyfill')({})
-
-export const get = (host, header, data) => {
-  return fetch(host, data)
+export default () => {
+  return {
+    get (fetch, baseData) {
+      fetch(baseData.url)
+    }
+  }
 }
