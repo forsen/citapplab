@@ -1,10 +1,12 @@
 import { expect } from 'chai'
-import { Verifier } from '../../src/lib/ckan/get'
+import { MissingBaseUrl } from '../../src/lib/ckan/customError'
+import Ckan from '../../src/lib/ckan'
 
-const CKAN_HOST = 'anything'
-const NOT_CKAN_HOST = 'anything else'
+const CKAN_HOST = 'https://data.smartbydata.no/'
+// const NOT_CKAN_HOST = 'anything else'
 
 describe('CKAN Module tests', () => {
+/*
   let fetch
   let obj
   before(() => {
@@ -29,6 +31,27 @@ describe('CKAN Module tests', () => {
     }
     obj = Verifier()
   })
+  */
+  it('test', () => {
+    const myobj = Ckan(CKAN_HOST)
+    return myobj.listAllPackages()
+      .then((result) => {
+        expect(result.status).to.equal(200)
+        return result.json()
+      })
+      .then((response) => {
+        expect(response.success).to.be.true
+      })
+      .catch(() => {
+        throw new Error('Not supposed to fail')
+      })
+  })
+
+  it('Instantiation without baseUrl should throw error', () => {
+    const missingBaseUrl = MissingBaseUrl()
+    expect(Ckan()).to.throw(missingBaseUrl)
+  })
+  /*
   it('Verify host is valid', () => {
     return obj.verify(fetch, CKAN_HOST)
       .catch(() => {
@@ -45,4 +68,5 @@ describe('CKAN Module tests', () => {
         expect(error.message).to.equal('not a valid ckan host')
       })
   })
+  */
 })

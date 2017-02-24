@@ -1,7 +1,3 @@
-export default () => {
-  return {
-    get (fetch, baseData) {
-      fetch(baseData.url)
-    }
-  }
-}
+import DataFetcher from './dataFetcher'
+
+export { DataFetcher }
