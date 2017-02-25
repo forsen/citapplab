@@ -1,7 +1,7 @@
-import ngsi from './lib/ngsi'
-import ckan from './lib/ckan'
+import Ngsi from './lib/ngsi'
+import Ckan from './lib/ckan'
 
 export {
-  ngsi,
-  ckan
+  Ngsi,
+  Ckan
 }

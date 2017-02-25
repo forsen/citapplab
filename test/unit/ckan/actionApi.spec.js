@@ -3,6 +3,12 @@ import {expect} from 'chai'
 import { makeRequests } from '../../../src/lib/ckan/utils'
 import { DataFetcher } from '../../../src/lib/utils'
 describe('CKAN ActionApi', () => {
+  const error = new Error('Not supposed to fail')
+  const config = {
+    url: '',
+    options: {}
+  }
+
   const fetch = () => {
     return new Promise((resolve) => {
       resolve({
@@ -20,10 +26,6 @@ describe('CKAN ActionApi', () => {
   const dataFetcher = DataFetcher(fetch)
 
   it('listAllPackages should return a resolved promise', () => {
-    const config = {
-      url: '',
-      options: {}
-    }
     const actionApi = ActionApi(dataFetcher, config, makeRequests)
 
     return actionApi.listAllPackages()
@@ -31,7 +33,19 @@ describe('CKAN ActionApi', () => {
         expect(response.status).to.equal(200)
       })
       .catch(() => {
-        throw new Error('Not supposed to fail')
+        throw error
+      })
+  })
+
+  it('listAllPackagesWith', () => {
+    const actionApi = ActionApi(dataFetcher, config, makeRequests)
+
+    return actionApi.listAllPackagesWithResources()
+      .then((response) => {
+        expect(response.status).to.equal(200)
+      })
+      .catch(() => {
+        throw error
       })
   })
 })

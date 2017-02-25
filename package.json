@@ -38,6 +38,7 @@
     "webpack": "2.2.1"
   },
   "dependencies": {
-    "fetch-ponyfill": "^3.0.2"
+    "es6-promise": "4.0.5",
+    "fetch-ponyfill": "4.0.0"
   }
 }
