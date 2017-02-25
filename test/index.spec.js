@@ -1,7 +1,11 @@
-/*
-import chai from 'chai'
-import citapplab from '../src'
+import { ngsi, ckan } from '../lib/bundle'
+import { expect } from 'chai'
 
-const expect = chai.expect
-const HOST = 'http://demo.ckan.com'
-*/
+describe('Library', () => {
+  it('should export NGSI', () => {
+    expect(ngsi).to.exist
+  })
+  it('should export CKAN', () => {
+    expect(ckan).to.exist
+  })
+})

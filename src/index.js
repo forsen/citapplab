@@ -1,9 +1,7 @@
 import ngsi from './lib/ngsi'
 import ckan from './lib/ckan'
 
-const citapplab = {
+export {
   ngsi,
   ckan
 }
-
-export default citapplab
