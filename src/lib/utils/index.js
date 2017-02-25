@@ -1,3 +1,4 @@
 import DataFetcher from './dataFetcher'
+import DefaultErrorCodes from './defaultErrorCodes'
 
-export { DataFetcher }
+export { DataFetcher, DefaultErrorCodes }

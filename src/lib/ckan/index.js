@@ -1,8 +1,13 @@
 import createFetch from 'fetch-ponyfill'
-import { DataFetcher } from '../utils'
-import {
-  MissingBaseUrl
-} from './customError'
+import { DataFetcher, DefaultErrorCodes } from '../utils'
+import CkanError from './ckanErrorCodes'
+import ActionApi from './actionApi'
+
+const ErrorCodes = () => {
+  const ckanError = CkanError()
+  const error = DefaultErrorCodes()
+  return Object.assign({}, ckanError, error)
+}
 
 const makeRequests = (apiUrl, endpoint, parameters) => {
   const _parameters = parameters || ''
@@ -17,24 +22,15 @@ const makeRequests = (apiUrl, endpoint, parameters) => {
   return request
 }
 
-const action = (dataFetcher, config, makeRequests) => {
-  return {
-    listAllPackages () {
-      const request = makeRequests(config.apiUrl, 'package_list')
-      return dataFetcher.fetch(request.url, request.options)
-    }
-  }
-}
-
 const Ckan = (baseUrl) => {
-  const missingBaseUrl = MissingBaseUrl()
+  const errorCodes = ErrorCodes()
   const fetch = createFetch().fetch
   // TODO: check for trailing slash
   const apiUrl = baseUrl + '/api/3/action/'
 
   if (baseUrl === undefined) {
     return () => {
-      throw missingBaseUrl.error()
+      throw errorCodes.missingBaseUrl()
     }
   }
 
@@ -47,7 +43,7 @@ const Ckan = (baseUrl) => {
 
   return Object.assign(
     {},
-    action(dataFetcher, config, makeRequests))
+    ActionApi(dataFetcher, config, makeRequests))
 }
 
 export default Ckan
