@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { Query } from '../../src/lib/ngsi/actions'
+import { Query } from '../../../src/lib/ngsi/actions'
 
 describe('NGSI Actions', () => {
   it('Query action', () => {

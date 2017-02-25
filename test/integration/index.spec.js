@@ -1,4 +1,4 @@
-import { ngsi, ckan } from '../lib/bundle'
+import { ngsi, ckan } from '../../lib/bundle'
 import { expect } from 'chai'
 
 describe('Library', () => {

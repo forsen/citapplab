@@ -1,7 +1,7 @@
-import ActionApi from '../../src/lib/ckan/actionApi'
+import ActionApi from '../../../src/lib/ckan/actionApi'
 import {expect} from 'chai'
-import { makeRequests } from '../../src/lib/ckan/utils'
-import { DataFetcher } from '../../src/lib/utils'
+import { makeRequests } from '../../../src/lib/ckan/utils'
+import { DataFetcher } from '../../../src/lib/utils'
 describe('CKAN ActionApi', () => {
   const fetch = () => {
     return new Promise((resolve) => {

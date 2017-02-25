@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import Ckan from '../../src/lib/ckan'
+import Ckan from '../../../src/lib/ckan'
 
 const CKAN_HOST = 'https://data.smartbydata.no/'
 

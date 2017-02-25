@@ -1,9 +1,9 @@
 language: node_js
 node_js:
 - node
-script: npm run travis-test
+script: npm run unit-test
 after_success: npm run report-coverage
-before_deploy: webpack
+before_deploy: webpack && npm run integration-test
 deploy:
   provider: npm
   email: npm@mail.forsen.no

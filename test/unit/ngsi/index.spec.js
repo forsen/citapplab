@@ -1,4 +1,4 @@
-import Ngsi from '../../src/lib/ngsi'
+import Ngsi from '../../../src/lib/ngsi'
 
 const NGSI_HOST = 'http://unagi.no:1026/'
 
