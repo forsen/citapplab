@@ -1,6 +1,6 @@
 {
   "name": "citapplab",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A library for Citizen Science projects",
   "main": "lib/bundle.js",
   "scripts": {
