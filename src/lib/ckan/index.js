@@ -15,7 +15,7 @@ const ErrorCodes = () => {
 const Ckan = (baseUrl) => {
   const errorCodes = ErrorCodes()
 
-  const fetch = fetch || createFetch(require('es6-promise').Promise).fetch
+  const fetch = fetch || createFetch().fetch
   // TODO: check for trailing slash
   const apiUrl = baseUrl + API_URI
 

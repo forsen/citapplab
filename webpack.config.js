@@ -25,7 +25,8 @@ const config = {
         exclude: /node_modules/
       }
     ]
-  }
+  },
+  target: 'node'
 }
 
 module.exports = config
