@@ -26,7 +26,9 @@ const config = {
       }
     ]
   },
-  target: 'node'
+  externals: {
+    'react-native': 'react-native'
+  }
 }
 
 module.exports = config

@@ -20,9 +20,9 @@ const Ckan = (baseUrl) => {
   const apiUrl = baseUrl + API_URI
 
   if (baseUrl === undefined) {
-    return () => {
-      throw errorCodes.missingBaseUrl()
-    }
+    // return () => {
+    throw errorCodes.missingBaseUrl()
+    // }
   }
 
   const dataFetcher = DataFetcher(fetch)

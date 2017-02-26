@@ -8,6 +8,8 @@ const errorCodes = {
 
 describe('CKAN Module tests', () => {
   it('Instantiation without baseUrl should throw error', () => {
-    expect(Ckan()).to.throw(errorCodes.missingBaseUrl)
+    expect(() => {
+      Ckan()
+    }).to.throw(errorCodes.missingBaseUrl)
   })
 })
