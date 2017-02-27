@@ -1,8 +1,7 @@
-import { fetch } from 'fetch-ponyfill'
 import { DataFetcher } from '../utils'
 import { Query } from './actions'
 
-const dataFetcher = DataFetcher(fetch)
+const dataFetcher = DataFetcher()
 
 const query = Query()
 

@@ -36,10 +36,5 @@
     "mocha": "3.2.0",
     "nyc": "10.1.2",
     "webpack": "2.2.1"
-  },
-  "dependencies": {
-    "es6-promise": "4.0.5",
-    "fetch-ponyfill": "4.0.0",
-    "xmlhttprequest": "^1.8.0"
   }
 }

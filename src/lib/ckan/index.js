@@ -1,4 +1,3 @@
-import createFetch from 'fetch-ponyfill'
 import { DataFetcher, DefaultErrorCodes } from '../utils'
 import CkanError from './ckanErrorCodes'
 import ActionApi from './actionApi'
@@ -15,7 +14,6 @@ const ErrorCodes = () => {
 const Ckan = (baseUrl) => {
   const errorCodes = ErrorCodes()
 
-  const fetch = fetch || createFetch().fetch
   // TODO: check for trailing slash
   const apiUrl = baseUrl + API_URI
 
@@ -25,7 +23,7 @@ const Ckan = (baseUrl) => {
     // }
   }
 
-  const dataFetcher = DataFetcher(fetch)
+  const dataFetcher = DataFetcher()
   const config = {
     apiUrl,
     auth: '',
