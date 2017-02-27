@@ -37,7 +37,7 @@ describe('CKAN ActionApi', () => {
       })
   })
 
-  it('listAllPackagesWith', () => {
+  it('listAllPackagesWithResources', () => {
     const actionApi = ActionApi(dataFetcher, config, makeRequests)
 
     return actionApi.listAllPackagesWithResources()

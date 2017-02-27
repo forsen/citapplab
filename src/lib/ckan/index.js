@@ -11,28 +11,24 @@ const ErrorCodes = () => {
   return Object.assign({}, ckanError, error)
 }
 
-const Ckan = (baseUrl) => {
+const Ckan = (config) => {
   const errorCodes = ErrorCodes()
 
-  // TODO: check for trailing slash
-  const apiUrl = baseUrl + API_URI
-
-  if (baseUrl === undefined) {
-    // return () => {
+  if (config === undefined) {
+    throw errorCodes.missingConfig()
+  }
+  if (config.baseUrl === undefined) {
     throw errorCodes.missingBaseUrl()
-    // }
   }
 
+  const baseUrl = config.baseUrl.replace(/\/$/, '')
+  const apiUrl = baseUrl + API_URI
   const dataFetcher = DataFetcher(fetch)
-  const config = {
-    apiUrl,
-    auth: '',
-    options: {}
-  }
+  const _config = Object.assign({}, config, apiUrl)
 
   return Object.assign(
     {},
-    ActionApi(dataFetcher, config, makeRequests))
+    ActionApi(dataFetcher, _config, makeRequests))
 }
 
 export default Ckan
