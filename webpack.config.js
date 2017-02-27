@@ -25,9 +25,6 @@ const config = {
         exclude: /node_modules/
       }
     ]
-  },
-  externals: {
-    'react-native': 'react-native'
   }
 }
 
