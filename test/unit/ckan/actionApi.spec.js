@@ -1,5 +1,5 @@
 import ActionApi from '../../../src/lib/ckan/actionApi'
-import {expect} from 'chai'
+import { expect } from 'chai'
 import { makeRequests } from '../../../src/lib/ckan/utils'
 import { DataFetcher } from '../../../src/lib/utils'
 describe('CKAN ActionApi', () => {
@@ -41,6 +41,18 @@ describe('CKAN ActionApi', () => {
     const actionApi = ActionApi(dataFetcher, config, makeRequests)
 
     return actionApi.listAllPackagesWithResources()
+      .then((response) => {
+        expect(response.status).to.equal(200)
+      })
+      .catch(() => {
+        throw error
+      })
+  })
+
+  it('searchPackages with empty parameter list should return all packages', () => {
+    const actionApi = ActionApi(dataFetcher, config, makeRequests)
+
+    return actionApi.searchPackages()
       .then((response) => {
         expect(response.status).to.equal(200)
       })

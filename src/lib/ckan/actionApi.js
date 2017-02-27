@@ -7,6 +7,10 @@ export default (dataFetcher, config, makeRequests) => {
     listAllPackagesWithResources () {
       const request = makeRequests(config.apiUrl, 'current_package_list_with_resources')
       return dataFetcher.fetch(request.url, request.options)
+    },
+    searchPackages () {
+      const request = makeRequests(config.apiUrl, 'package_search')
+      return dataFetcher.fetch(request.url, request.options)
     }
   }
 }
