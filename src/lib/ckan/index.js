@@ -23,7 +23,7 @@ const Ckan = (baseUrl) => {
     // }
   }
 
-  const dataFetcher = DataFetcher()
+  const dataFetcher = DataFetcher(fetch)
   const config = {
     apiUrl,
     auth: '',

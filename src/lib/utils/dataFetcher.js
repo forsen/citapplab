@@ -1,4 +1,4 @@
-export default (fetch = fetch) => {
+export default (fetch) => {
   return {
     fetch (url, options) {
       return fetch(url, options)
