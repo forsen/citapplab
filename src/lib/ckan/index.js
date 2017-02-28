@@ -1,7 +1,7 @@
 import { DataFetcher, DefaultErrorCodes } from '../utils'
 import CkanError from './ckanErrorCodes'
 import ActionApi from './actionApi'
-import { makeRequests } from './utils'
+import { makeRequests, Parsers } from './utils'
 
 const API_URI = 'api/3/action/'
 
@@ -23,12 +23,17 @@ const Ckan = (config) => {
 
   const baseUrl = config.baseUrl.replace(/\/$/, '')
   const apiUrl = baseUrl + API_URI
+
   const dataFetcher = DataFetcher(fetch)
+  const parsers = Parsers()
+
+  console.log(parsers)
+
   const _config = Object.assign({}, config, apiUrl)
 
   return Object.assign(
     {},
-    ActionApi(dataFetcher, _config, makeRequests))
+    ActionApi(dataFetcher, _config, makeRequests, parsers))
 }
 
 export default Ckan
