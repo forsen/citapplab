@@ -1,10 +1,17 @@
 {
-    "parserOptions": {
-        "sourceType": "module"
-    },
-    "extends": ["standard"],
-    "env":{
-        "mocha": true,
-        "browser": true
-    }
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": [
+    "standard",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype"
+  ],
+  "env": {
+    "mocha": true,
+    "browser": true
+  }
 }
