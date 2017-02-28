@@ -2,10 +2,11 @@
   "name": "citapplab",
   "version": "0.6.6",
   "description": "A library for Citizen Science projects",
-  "main": "lib/bundle.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack --progress --colors --watch",
+    "prepublish": "npm run babel-prepublish && npm run flow-prepublish",
+    "babel-prepublish": "babel src/ -d lib",
+    "flow-prepublish": "flow-copy-source src lib",
     "test": "mocha --compilers js:babel-core/register --colors -w --recursive ./test/",
     "unit-test": "nyc --require babel-core/register mocha --recursive ./test/unit/",
     "integration-test": "mocha --compilers js:babel-core/register --colors --recursive ./test/",
@@ -37,8 +38,8 @@
     "eslint-plugin-promise": "3.4.1",
     "eslint-plugin-standard": "2.0.1",
     "flow-bin": "0.40.0",
+    "flow-copy-source": "1.1.0",
     "mocha": "3.2.0",
-    "nyc": "10.1.2",
-    "webpack": "2.2.1"
+    "nyc": "10.1.2"
   }
 }

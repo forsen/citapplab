@@ -1,4 +1,4 @@
-import { Ngsi, Ckan } from '../../lib/bundle'
+import { Ngsi, Ckan } from '../../lib/index'
 import { expect } from 'chai'
 
 // const CKAN_HOST = 'https://data.smartbydata.no/'
