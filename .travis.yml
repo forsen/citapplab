@@ -3,7 +3,7 @@ node_js:
 - node
 script: npm run unit-test
 after_success: npm run report-coverage
-before_deploy: webpack && npm run integration-test
+before_deploy: npm run prepublish && npm run integration-test
 deploy:
   provider: npm
   email: npm@mail.forsen.no
