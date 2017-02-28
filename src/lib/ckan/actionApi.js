@@ -1,4 +1,7 @@
-export default (dataFetcher, config, makeRequests) => {
+/* @flow */
+type dataFetcher = (fetch: Function) => Promise<any>
+type makeRequest = (url: string, endpoint: string) => {url: string, options: string}
+export default (dataFetcher: dataFetcher, config: {apiUrl: string}, makeRequests: makeRequest) => {
   return {
     listAllPackages () {
       const request = makeRequests(config.apiUrl, 'package_list')
