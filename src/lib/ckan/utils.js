@@ -17,14 +17,11 @@ export const Parsers = () => {
       return new Promise((resolve) => {
         promise
           .then((response) => {
-            console.log(response)
             return response.json()
           })
           .then((jsonResponse) => {
-            console.log(jsonResponse)
             resolve(jsonResponse)
           })
-        console.log('hei')
       })
     },
     packageParser (promise) {
