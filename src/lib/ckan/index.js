@@ -27,8 +27,6 @@ const Ckan = (config) => {
   const dataFetcher = DataFetcher(fetch)
   const parsers = Parsers()
 
-  console.log(parsers)
-
   const _config = Object.assign({}, config, apiUrl)
 
   return Object.assign(
