@@ -1,31 +1,49 @@
 import ActionApi from '../../../src/lib/ckan/actionApi'
 
-import {expect} from 'chai'
-import {makeRequests, Parsers} from '../../../src/lib/ckan/utils'
-import {DataFetcher} from '../../../src/lib/utils'
+import { expect } from 'chai'
 describe('CKAN ActionApi', () => {
   const error = new Error('Not supposed to fail')
   const config = {
     url: '',
     options: {}
   }
-
-  const fetch = () => {
-    return new Promise((resolve) => {
-      resolve({
-        status: 200,
-        json: () => {
-          return new Promise((resolve) => {
-            resolve({
-              some: 'data'
-            })
+  const dataFetcher = (() => {
+    return {
+      fetch () {
+        return new Promise((resolve) => {
+          resolve({
+            status: 200,
+            json: () => {
+              return new Promise((resolve) => {
+                resolve({
+                  some: 'data'
+                })
+              })
+            }
           })
-        }
-      })
-    })
+        })
+      }
+    }
+  })()
+
+  const parsers = (() => {
+    return {
+      packageParser () {
+        return new Promise((resolve) => {
+          resolve({})
+        })
+      },
+      datastoreParser () {
+        return new Promise((resolve) => {
+          resolve({})
+        })
+      }
+    }
+  })()
+
+  const makeRequests = () => {
+    return ''
   }
-  const dataFetcher = DataFetcher(fetch)
-  const parsers = Parsers()
 
   it('listAllPackages should return a resolved promise', () => {
     const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
@@ -39,7 +57,7 @@ describe('CKAN ActionApi', () => {
       })
   })
 
-  it('listAllPackagesWithResources', () => {
+  it('listAllPackagesWithResources should return a resolved promise', () => {
     const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
 
     return actionApi.listAllPackagesWithResources()
@@ -55,6 +73,18 @@ describe('CKAN ActionApi', () => {
     const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
 
     return actionApi.searchPackages()
+      .then((response) => {
+        expect(response).to.be.a('object')
+      })
+      .catch(() => {
+        throw error
+      })
+  })
+
+  it('datastoreSearch should return a resolved promise', () => {
+    const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
+
+    return actionApi.datastoreSearch()
       .then((response) => {
         expect(response).to.be.a('object')
       })
