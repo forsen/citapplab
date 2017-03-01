@@ -1,24 +1,51 @@
+import { compose, DataFetcher, HTTPErrorHandler } from '../utils'
+import CkanHTTPErrorHandler from './ckanHttpErrorHandler'
+import { makeRequests, Parsers } from './utils'
+
+const parsers = Parsers()
+const httpErrorHandler = HTTPErrorHandler()
+const ckanHttpErrorHandler = CkanHTTPErrorHandler()
+const dataFetcher = DataFetcher()
+
 export default (actionApiArguments) => {
   const {
-    config,
-    dataFetcher,
-    parsers,
-    makeRequests
+    config
   } = actionApiArguments
+
+  const {
+    resourceParser,
+    packageParser
+  } = parsers
+
+  const fetchMyData = compose(dataFetcher.fetch, makeRequests)
   return {
     listAllPackages () {
-      const request = makeRequests(config, 'package_list')
-      return dataFetcher.fetch(request.url, request.options)
+      return fetchMyData(Object.assign({}, config, { endpoint: 'package_list' }))
+        .then(httpErrorHandler.checkResponse)
+        .then((response) => response.json())
+        .then(ckanHttpErrorHandler.checkResponse)
+        .then(packageParser)
     },
     listAllPackagesWithResources () {
-      const request = makeRequests(config, 'current_package_list_with_resources')
-      return dataFetcher.fetch(request.url, request.options)
+      return fetchMyData(Object.assign({}, config, { endpoint: 'current_package_list_with_resources' }))
+        .then(httpErrorHandler.checkResponse)
+        .then((response) => response.json())
+        .then(ckanHttpErrorHandler.checkResponse)
+        .then(packageParser)
     },
     packageSearch () {
-      return parsers.packageParser(dataFetcher.fetch(makeRequests(config, 'package_search')))
+      return fetchMyData(Object.assign({}, config, { endpoint: 'package_search' }))
+        .then(httpErrorHandler.checkResponse)
+        .then((response) => response.json())
+        .then(ckanHttpErrorHandler.checkResponse)
+        .then(packageParser)
     },
     datastoreSearch () {
-      return parsers.datastoreParser(dataFetcher.fetch(makeRequests(config, 'datastore_search')))
+      return fetchMyData(Object.assign({}, config, { endpoint: 'datastore_search' }))
+        .then(httpErrorHandler.checkResponse)
+        .then((response) => response.json())
+        .then(ckanHttpErrorHandler.checkResponse)
+        .then(resourceParser)
     }
   }
 }

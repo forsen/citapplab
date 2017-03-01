@@ -5,12 +5,6 @@ import CkanHTTPErrorHandler from '../../../src/lib/ckan/ckanHttpErrorHandler'
 describe('CKAN HTTPErrorHandler tests', () => {
   const ckanHttpErrorHandler = CkanHTTPErrorHandler()
 
-  const createPromise = (response) => {
-    return new Promise((resolve) => {
-      resolve(response)
-    })
-  }
-
   it('Successful', () => {
     const response = {
       'help': 'oeu',
@@ -18,9 +12,7 @@ describe('CKAN HTTPErrorHandler tests', () => {
       'result': []
     }
 
-    const promise = createPromise(response)
-
-    return ckanHttpErrorHandler.checkResponse(promise)
+    return ckanHttpErrorHandler.checkResponse(response)
       .then((response) => {
         expect(response.success).to.be.true
       })
@@ -39,9 +31,7 @@ describe('CKAN HTTPErrorHandler tests', () => {
       }
     }
 
-    const promise = createPromise(response)
-
-    return ckanHttpErrorHandler.checkResponse(promise)
+    return ckanHttpErrorHandler.checkResponse(response)
       .then(() => {
         throw new Error('not supposed to succeed')
       })

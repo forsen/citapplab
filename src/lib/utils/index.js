@@ -1,5 +1,6 @@
 import DataFetcher from './dataFetcher'
 import DefaultErrorCodes from './defaultErrorCodes'
 import HTTPErrorHandler from './httpErrorHandler'
+import compose from './compose'
 
-export { DataFetcher, DefaultErrorCodes, HTTPErrorHandler }
+export { compose, DataFetcher, DefaultErrorCodes, HTTPErrorHandler }

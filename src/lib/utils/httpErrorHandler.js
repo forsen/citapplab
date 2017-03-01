@@ -1,13 +1,13 @@
 export default () => {
   return {
-    checkResponse (promise) {
-      return promise.then((response) => {
+    checkResponse (response) {
+      return new Promise((resolve, reject) => {
         if (response.status >= 200 && response.status < 300) {
-          return response
+          resolve(response)
         } else {
           let error = new Error(response.statusText || response.status)
           error.response = response
-          throw error
+          reject(error)
         }
       })
     }

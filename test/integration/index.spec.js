@@ -19,12 +19,10 @@ describe('Library', () => {
     const ckan = Ckan({baseUrl: CKAN_HOST})
     it('test anything', () => {
       return ckan.listAllPackages()
-        .then((response) => response.json())
         .then((jsonResult) => {
           expect(jsonResult.success).to.be.true
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
           throw error
         })
     })

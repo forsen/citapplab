@@ -3,15 +3,25 @@ import { expect } from 'chai'
 import { DataFetcher } from '../../../src/lib/utils'
 
 describe('DataFetcher tests', () => {
-  const myFetch = (url, options) => {
-    return Promise.resolve({url: url, options: options})
-  }
-  const dataFetcher = DataFetcher(myFetch)
+  let tempFetch
+  before(() => {
+    tempFetch = global.fetch
+    global.fetch = (url, options) => {
+      return Promise.resolve({url: url, options: options})
+    }
+  })
+
+  after(() => {
+    global.fetch = tempFetch
+  })
+
+  const dataFetcher = DataFetcher()
   it('Should return a function called with url and options', () => {
-    return dataFetcher.fetch('url', {data: 'someOptions'})
+    return dataFetcher.fetch({url: 'url', options: 'someOptions'})
       .then((obj) => {
+        console.log(obj)
         expect(obj.url).to.equal('url')
-        expect(obj.options).to.deep.equal({data: 'someOptions'})
+        expect(obj.options).to.deep.equal('someOptions')
       })
   })
 })

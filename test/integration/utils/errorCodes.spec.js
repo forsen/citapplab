@@ -7,7 +7,8 @@ describe('Testing http codes', () => {
   const httpErrorHandler = HTTPErrorHandler()
 
   it('200', () => {
-    return httpErrorHandler.checkResponse(dataFetcher.fetch('http://httpstat.us/200'))
+    return dataFetcher.fetch({url: 'http://httpstat.us/200'})
+      .then(httpErrorHandler.checkResponse)
       .then((response) => {
         expect(response.status).to.equal(200)
       })
@@ -16,7 +17,8 @@ describe('Testing http codes', () => {
       })
   })
   it('500', () => {
-    return httpErrorHandler.checkResponse(dataFetcher.fetch('http://httpstat.us/500'))
+    return dataFetcher.fetch({url: 'http://httpstat.us/500'})
+      .then(httpErrorHandler.checkResponse)
       .then(() => {
         throw new Error('not supposed to succeed')
       })

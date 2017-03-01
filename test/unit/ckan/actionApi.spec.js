@@ -2,53 +2,40 @@ import ActionApi from '../../../src/lib/ckan/actionApi'
 
 import { expect } from 'chai'
 describe('CKAN ActionApi', () => {
+  let tempFetch
+  before(() => {
+    tempFetch = global.fetch
+    global.fetch = () => {
+      return new Promise((resolve) => {
+        resolve({
+          status: 200,
+          json: () => {
+            return new Promise((resolve) => {
+              resolve({
+                success: true,
+                message: 'balle',
+                error: {
+                  message: 'hæ'
+                }
+              })
+            })
+          }
+        })
+      })
+    }
+  })
+
+  after(() => {
+    global.fetch = tempFetch
+  })
+
   const error = new Error('Not supposed to fail')
   const config = {
     url: '',
     options: {}
   }
-  const dataFetcher = (() => {
-    return {
-      fetch () {
-        return new Promise((resolve) => {
-          resolve({
-            status: 200,
-            json: () => {
-              return new Promise((resolve) => {
-                resolve({
-                  some: 'data'
-                })
-              })
-            }
-          })
-        })
-      }
-    }
-  })()
-
-  const parsers = (() => {
-    return {
-      packageParser () {
-        return new Promise((resolve) => {
-          resolve({})
-        })
-      },
-      datastoreParser () {
-        return new Promise((resolve) => {
-          resolve({})
-        })
-      }
-    }
-  })()
-
-  const makeRequests = () => {
-    return ''
-  }
 
   const actionApiArguments = {
-    parsers,
-    makeRequests,
-    dataFetcher,
     config
   }
   it('listAllPackages should return a resolved promise', () => {
@@ -68,7 +55,7 @@ describe('CKAN ActionApi', () => {
 
     return actionApi.listAllPackagesWithResources()
       .then((response) => {
-        expect(response.status).to.equal(200)
+        expect(response).to.be.a('object')
       })
       .catch(() => {
         throw error

@@ -1,7 +1,13 @@
-export const makeRequests = (config, endpoint, parameters) => {
+export const makeRequests = (makeRequstsArguments) => {
+  const {
+    apiUrl,
+    endpoint,
+    parameters
+  } = makeRequstsArguments
+
   const _parameters = parameters || ''
   let request = {}
-  request.url = config.apiUrl + endpoint + _parameters
+  request.url = apiUrl + endpoint + _parameters
   request.options = {
     method: 'GET',
     headers: {
@@ -13,24 +19,14 @@ export const makeRequests = (config, endpoint, parameters) => {
 
 export const Parsers = () => {
   return {
-    resourceParser (promise) {
+    resourceParser (response) {
       return new Promise((resolve) => {
-        promise
-          .then((response) => {
-            return response.json()
-          })
-          .then((jsonResponse) => {
-            resolve(jsonResponse)
-          })
+        resolve(response)
       })
     },
-    packageParser (promise) {
+    packageParser (response) {
       return new Promise((resolve) => {
-        promise
-          .then((response) => response.json())
-          .then((jsonResponse) => {
-            resolve(jsonResponse)
-          })
+        resolve(response)
       })
     }
   }

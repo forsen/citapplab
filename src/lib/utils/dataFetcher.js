@@ -1,7 +1,7 @@
-export default (fetch) => {
+export default () => {
   return {
-    fetch (url, options) {
-      return fetch(url, options)
+    fetch (request) {
+      return fetch(request.url, request.options)
     }
   }
 }
