@@ -7,10 +7,15 @@ describe('CKAN Utils tests', () => {
       apiUrl: 'apiUrl'
     }
     const endpoint = 'endpoint'
-    const parameters = []
+    const parameters = 'parameter'
 
     it('makeRequests should return request create url from arguments', () => {
       const request = makeRequests(config, endpoint, parameters)
+      expect(request.url).to.equal('apiUrlendpointparameter')
+    })
+
+    it('makeRequests should return request create url without parameters', () => {
+      const request = makeRequests(config, endpoint)
       expect(request.url).to.equal('apiUrlendpoint')
     })
 
