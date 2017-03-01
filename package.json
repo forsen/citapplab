@@ -8,7 +8,7 @@
     "dev": "webpack --progress --colors --watch",
     "test": "mocha --compilers js:babel-core/register --colors -w --recursive ./test/",
     "unit-test": "nyc --require babel-core/register mocha --recursive ./test/unit/",
-    "integration-test": "mocha --compilers js:babel-core/register --colors --recursive ./test/",
+    "integration-test": "mocha --compilers js:babel-core/register --colors --recursive ./test/integration",
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov -t $CODECOV_API_KEY"
   },
   "repository": {
