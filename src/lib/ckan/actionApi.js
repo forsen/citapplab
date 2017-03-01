@@ -1,4 +1,10 @@
-export default (dataFetcher, config, makeRequests, parsers) => {
+export default (actionApiArguments) => {
+  const {
+    config,
+    dataFetcher,
+    parsers,
+    makeRequests
+  } = actionApiArguments
   return {
     listAllPackages () {
       const request = makeRequests(config, 'package_list')

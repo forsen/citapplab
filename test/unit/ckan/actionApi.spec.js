@@ -45,8 +45,14 @@ describe('CKAN ActionApi', () => {
     return ''
   }
 
+  const actionApiArguments = {
+    parsers,
+    makeRequests,
+    dataFetcher,
+    config
+  }
   it('listAllPackages should return a resolved promise', () => {
-    const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
+    const actionApi = ActionApi(actionApiArguments)
 
     return actionApi.listAllPackages()
       .then((response) => {
@@ -58,7 +64,7 @@ describe('CKAN ActionApi', () => {
   })
 
   it('listAllPackagesWithResources should return a resolved promise', () => {
-    const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
+    const actionApi = ActionApi(actionApiArguments)
 
     return actionApi.listAllPackagesWithResources()
       .then((response) => {
@@ -70,7 +76,7 @@ describe('CKAN ActionApi', () => {
   })
 
   it('packageSearch with empty parameter list should return all packages', () => {
-    const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
+    const actionApi = ActionApi(actionApiArguments)
 
     return actionApi.packageSearch()
       .then((response) => {
@@ -82,7 +88,7 @@ describe('CKAN ActionApi', () => {
   })
 
   it('datastoreSearch should return a resolved promise', () => {
-    const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
+    const actionApi = ActionApi(actionApiArguments)
 
     return actionApi.datastoreSearch()
       .then((response) => {
