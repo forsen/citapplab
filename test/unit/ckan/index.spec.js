@@ -1,4 +1,6 @@
 import { expect } from 'chai'
+import fetch from 'node-fetch'
+
 import Ckan from '../../../src/lib/ckan'
 
 const errorCodes = {
@@ -8,6 +10,7 @@ const errorCodes = {
 }
 
 describe('CKAN Module tests', () => {
+  global.fetch = fetch
   it('Instantiation without baseUrl should throw error', () => {
     expect(() => {
       Ckan({})
@@ -18,5 +21,20 @@ describe('CKAN Module tests', () => {
     expect(() => {
       Ckan()
     }).to.throw(errorCodes.missingConfig)
+  })
+  describe('CKAN should expose the following functions', () => {
+    const ckan = Ckan({baseUrl: 'someUrl'})
+    it('listAllPackages', () => {
+      expect(ckan.listAllPackages).to.be.a('function')
+    })
+    it('datastoreSearch', () => {
+      expect(ckan.datastoreSearch).to.be.a('function')
+    })
+    it('listAllPackagesWithResources', () => {
+      expect(ckan.listAllPackagesWithResources).to.be.a('function')
+    })
+    it('packageSearch', () => {
+      expect(ckan.packageSearch).to.be.a('function')
+    })
   })
 })
