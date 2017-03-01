@@ -8,7 +8,7 @@ export default (dataFetcher, config, makeRequests, parsers) => {
       const request = makeRequests(config, 'current_package_list_with_resources')
       return dataFetcher.fetch(request.url, request.options)
     },
-    searchPackages () {
+    packageSearch () {
       return parsers.packageParser(dataFetcher.fetch(makeRequests(config, 'package_search')))
     },
     datastoreSearch () {

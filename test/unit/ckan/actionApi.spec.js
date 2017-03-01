@@ -69,10 +69,10 @@ describe('CKAN ActionApi', () => {
       })
   })
 
-  it('searchPackages with empty parameter list should return all packages', () => {
+  it('packageSearch with empty parameter list should return all packages', () => {
     const actionApi = ActionApi(dataFetcher, config, makeRequests, parsers)
 
-    return actionApi.searchPackages()
+    return actionApi.packageSearch()
       .then((response) => {
         expect(response).to.be.a('object')
       })
