@@ -14,7 +14,7 @@ describe('CKAN Helper Api tests', () => {
     const limit = compose(helperApi.limit)(thisConfig)
 
     // expected value
-    const expected = ['limit=5']
+    const expected = { limit: 5 }
 
     // actual value
     const actual = limit.parameters
@@ -30,7 +30,7 @@ describe('CKAN Helper Api tests', () => {
     const limit = compose(helperApi.limit(argument))(thisConfig)
 
     // expected value
-    const expected = ['limit=10']
+    const expected = { limit: 10 }
 
     // actual value
     const actual = limit.parameters
@@ -46,7 +46,7 @@ describe('CKAN Helper Api tests', () => {
     const limit = compose(helperApi.limit(argument))(thisConfig)
 
     // expected value
-    const expected = ['limit=5']
+    const expected = { limit: 5 }
 
     // actual value
     const actual = limit.parameters

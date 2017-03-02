@@ -5,17 +5,24 @@ export const makeRequests = (makeRequstsArguments) => {
     parameters
   } = makeRequstsArguments
 
-  const parametersList = parameters.reduce((list, parameter) => {
-    return list + `?${parameter}`
-  }, '')
   let request = {}
-  request.url = apiUrl + endpoint + parametersList
+  request.url = apiUrl + endpoint
   request.options = {
     method: 'GET',
     headers: {
       'Accept': 'application/json'
     }
   }
+
+  const escape = encodeURIComponent
+  const query = Object.keys(parameters)
+    .map((key) => `${escape(key)}=${escape(parameters[key])}`)
+    .join('&')
+
+  if (query) {
+    request.url += `?${query}`
+  }
+
   return request
 }
 

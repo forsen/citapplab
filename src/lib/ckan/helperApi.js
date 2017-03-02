@@ -6,11 +6,11 @@ export default () => {
       if (typeof (argument) !== 'object') {
         return (config) => {
           const myArgument = typeof (argument) === 'number' ? argument : 5
-          const parameters = [...config.parameters, 'limit=' + myArgument]
+          const parameters = Object.assign({}, config.parameters, {limit: myArgument})
           return Object.assign({}, config, {parameters: parameters})
         }
       }
-      return Object.assign({}, argument, {parameters: [...argument.parameters, 'limit=5']})
+      return Object.assign({}, argument, { parameters: Object.assign({}, argument.parameters, { limit: 5 }) })
     },
     offset (config) {
       return config
