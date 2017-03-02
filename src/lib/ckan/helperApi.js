@@ -3,9 +3,10 @@ import ActionApi from './actionApi'
 export default () => {
   return {
     limit (argument) {
-      if (typeof (argument) === 'number') {
+      if (typeof (argument) !== 'object') {
         return (config) => {
-          const parameters = [...config.parameters, 'limit=' + argument]
+          const myArgument = typeof (argument) === 'number' ? argument : 5
+          const parameters = [...config.parameters, 'limit=' + myArgument]
           return Object.assign({}, config, {parameters: parameters})
         }
       }
