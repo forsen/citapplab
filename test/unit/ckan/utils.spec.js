@@ -31,7 +31,8 @@ describe('CKAN Utils tests', () => {
 
   describe('Parsers', () => {
     const response = {
-      data: 'someData'
+      success: true,
+      result: []
     }
 
     const parsers = Parsers()
@@ -39,14 +40,14 @@ describe('CKAN Utils tests', () => {
     it('resourceParser should return a resolved promise', () => {
       return parsers.resourceParser(response)
         .then((jsonResponse) => {
-          expect(jsonResponse).to.deep.equal({data: 'someData'})
+          expect(jsonResponse).to.be.an('array')
         })
     })
 
     it('packageParser should return a resolved promise', () => {
       return parsers.packageParser(response)
         .then((jsonResponse) => {
-          expect(jsonResponse).to.deep.equal({data: 'someData'})
+          expect(jsonResponse).to.be.an('array')
         })
     })
   })

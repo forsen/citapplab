@@ -16,7 +16,8 @@ describe('CKAN ActionApi', () => {
                 message: 'balle',
                 error: {
                   message: 'hæ'
-                }
+                },
+                result: []
               })
             })
           }
@@ -29,7 +30,6 @@ describe('CKAN ActionApi', () => {
     global.fetch = tempFetch
   })
 
-  const error = new Error('Not supposed to fail')
   const config = {
     apiUrl: '',
     endpoint: '',
@@ -40,12 +40,8 @@ describe('CKAN ActionApi', () => {
     const actionApi = ActionApi(config)
 
     return actionApi.listAllPackages()
-      .then((response) => {
-        expect(response).to.be.a('object')
-      })
-      .catch(() => {
-        throw error
-      })
+      .then((response) => { expect(response).to.be.a('array') })
+      .catch((error) => { throw error })
   })
 
   it('listAllPackagesWithResources should return a resolved promise', () => {
@@ -53,11 +49,9 @@ describe('CKAN ActionApi', () => {
 
     return actionApi.listAllPackagesWithResources()
       .then((response) => {
-        expect(response).to.be.a('object')
+        expect(response).to.be.a('array')
       })
-      .catch(() => {
-        throw error
-      })
+      .catch((error) => { throw error })
   })
 
   it('packageSearch with empty parameter list should return all packages', () => {
@@ -65,22 +59,16 @@ describe('CKAN ActionApi', () => {
 
     return actionApi.packageSearch()
       .then((response) => {
-        expect(response).to.be.a('object')
+        expect(response).to.be.a('array')
       })
-      .catch(() => {
-        throw error
-      })
+      .catch((error) => { throw error })
   })
 
   it('datastoreSearch should return a resolved promise', () => {
     const actionApi = ActionApi(config)
 
     return actionApi.datastoreSearch()
-      .then((response) => {
-        expect(response).to.be.a('object')
-      })
-      .catch(() => {
-        throw error
-      })
+      .then((response) => { expect(response).to.be.a('array') })
+      .catch((error) => { throw error })
   })
 })
