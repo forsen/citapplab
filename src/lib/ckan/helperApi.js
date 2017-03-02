@@ -10,10 +10,21 @@ export default () => {
           return Object.assign({}, config, {parameters: parameters})
         }
       }
-      return Object.assign({}, argument, { parameters: Object.assign({}, argument.parameters, { limit: 5 }) })
+      const parameters = Object.assign({}, argument.parameters, { limit: 5 })
+      return Object.assign({}, argument, {parameters: parameters})
     },
-    offset (config) {
-      return config
+    offset (number) {
+      if (typeof (number) !== 'number') {
+        throw new Error('Argument is required and must be of type number')
+      }
+      return (config) => {
+        if (!config.parameters.hasOwnProperty('limit')) {
+          throw new Error('Offset can only be called after limit has been called')
+        }
+        console.log(config)
+        const parameters = Object.assign({}, config.parameters, {offset: number})
+        return Object.assign({}, config, {parameters: parameters})
+      }
     },
     flatten (config) {
       return config
