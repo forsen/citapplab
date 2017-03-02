@@ -21,7 +21,6 @@ export default () => {
         if (!config.parameters.hasOwnProperty('limit')) {
           throw new Error('Offset can only be called after limit has been called')
         }
-        console.log(config)
         const parameters = Object.assign({}, config.parameters, {offset: number})
         return Object.assign({}, config, {parameters: parameters})
       }
