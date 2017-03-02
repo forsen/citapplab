@@ -1,10 +1,10 @@
-export default () => {
+export default (config) => {
   return {
-    packages (config) {
-      return config
+    packages () {
+      return Object.assign({}, config, { execute: 'packages' })
     },
-    resources (config) {
-      return config
+    resources () {
+      return Object.assign({}, config, { execute: 'resources' })
     }
   }
 }

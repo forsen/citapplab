@@ -5,9 +5,11 @@ export const makeRequests = (makeRequstsArguments) => {
     parameters
   } = makeRequstsArguments
 
-  const _parameters = parameters || ''
+  const parametersList = parameters.reduce((list, parameter) => {
+    return list + `?${parameter}`
+  }, '')
   let request = {}
-  request.url = apiUrl + endpoint + _parameters
+  request.url = apiUrl + endpoint + parametersList
   request.options = {
     method: 'GET',
     headers: {

@@ -1,7 +1,13 @@
 import fetch from 'node-fetch'
-import { Ngsi, Ckan } from '../../lib/bundle'
 import { expect } from 'chai'
 
+// import { Ngsi, Ckan } from '../../lib/bundle'
+import citapplab, { compose } from '../../lib/bundle'
+
+const {
+  Ckan,
+  Ngsi
+} = citapplab
 const CKAN_HOST = 'https://data.smartbydata.no/'
 const error = new Error('not supposed to fail')
 
@@ -16,9 +22,13 @@ describe('Library', () => {
   })
 
   describe('CKAN library functions', () => {
-    const ckan = Ckan({baseUrl: CKAN_HOST})
-    it('test anything', () => {
-      return ckan.listAllPackages()
+    const {
+      execute,
+      packages
+    } = Ckan({baseUrl: CKAN_HOST})
+    it('List all packages', () => {
+      const getPackages = compose(execute, packages)
+      return getPackages()
         .then((jsonResult) => {
           expect(jsonResult.success).to.be.true
         })

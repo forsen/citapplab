@@ -19,7 +19,6 @@ describe('DataFetcher tests', () => {
   it('Should return a function called with url and options', () => {
     return dataFetcher.fetch({url: 'url', options: 'someOptions'})
       .then((obj) => {
-        console.log(obj)
         expect(obj.url).to.equal('url')
         expect(obj.options).to.deep.equal('someOptions')
       })

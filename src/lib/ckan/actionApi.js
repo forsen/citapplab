@@ -7,11 +7,7 @@ const httpErrorHandler = HTTPErrorHandler()
 const ckanHttpErrorHandler = CkanHTTPErrorHandler()
 const dataFetcher = DataFetcher()
 
-export default (actionApiArguments) => {
-  const {
-    config
-  } = actionApiArguments
-
+export default (config) => {
   const {
     resourceParser,
     packageParser

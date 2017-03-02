@@ -31,15 +31,13 @@ describe('CKAN ActionApi', () => {
 
   const error = new Error('Not supposed to fail')
   const config = {
-    url: '',
-    options: {}
+    apiUrl: '',
+    endpoint: '',
+    parameters: []
   }
 
-  const actionApiArguments = {
-    config
-  }
   it('listAllPackages should return a resolved promise', () => {
-    const actionApi = ActionApi(actionApiArguments)
+    const actionApi = ActionApi(config)
 
     return actionApi.listAllPackages()
       .then((response) => {
@@ -51,7 +49,7 @@ describe('CKAN ActionApi', () => {
   })
 
   it('listAllPackagesWithResources should return a resolved promise', () => {
-    const actionApi = ActionApi(actionApiArguments)
+    const actionApi = ActionApi(config)
 
     return actionApi.listAllPackagesWithResources()
       .then((response) => {
@@ -63,7 +61,7 @@ describe('CKAN ActionApi', () => {
   })
 
   it('packageSearch with empty parameter list should return all packages', () => {
-    const actionApi = ActionApi(actionApiArguments)
+    const actionApi = ActionApi(config)
 
     return actionApi.packageSearch()
       .then((response) => {
@@ -75,7 +73,7 @@ describe('CKAN ActionApi', () => {
   })
 
   it('datastoreSearch should return a resolved promise', () => {
-    const actionApi = ActionApi(actionApiArguments)
+    const actionApi = ActionApi(config)
 
     return actionApi.datastoreSearch()
       .then((response) => {

@@ -23,18 +23,17 @@ describe('CKAN Module tests', () => {
     }).to.throw(errorCodes.missingConfig)
   })
   describe('CKAN should expose the following functions', () => {
-    const ckan = Ckan({baseUrl: 'someUrl'})
-    it('listAllPackages', () => {
-      expect(ckan.listAllPackages).to.be.a('function')
-    })
-    it('datastoreSearch', () => {
-      expect(ckan.datastoreSearch).to.be.a('function')
-    })
-    it('listAllPackagesWithResources', () => {
-      expect(ckan.listAllPackagesWithResources).to.be.a('function')
-    })
-    it('packageSearch', () => {
-      expect(ckan.packageSearch).to.be.a('function')
-    })
+    const {
+      execute,
+      flatten,
+      limit,
+      packages,
+      resources
+    } = Ckan({baseUrl: ''})
+    it('execute', () => expect(execute).to.be.a('function'))
+    it('flatten', () => expect(flatten).to.be.a('function'))
+    it('limit', () => expect(limit).to.be.a('function'))
+    it('packages', () => expect(packages).to.be.a('function'))
+    it('resources', () => expect(resources).to.be.a('function'))
   })
 })

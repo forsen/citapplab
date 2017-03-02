@@ -1,6 +1,7 @@
 import { DefaultErrorCodes } from '../utils'
 import CkanError from './ckanErrorCodes'
-import ActionApi from './actionApi'
+import LibApi from './libApi'
+import HelperApi from './helperApi'
 
 const API_URI = '/api/3/action/'
 
@@ -23,14 +24,13 @@ const Ckan = (config) => {
   const baseUrl = config.baseUrl.replace(/\/$/, '')
   const apiUrl = baseUrl + API_URI
 
-  const _config = Object.assign({}, config, { apiUrl: apiUrl })
+  const libApiArguments = Object.assign({}, config, { apiUrl: apiUrl }, { parameters: [] })
 
-  const actionApiArguments = {
-    config: _config
-  }
   return Object.assign(
     {},
-    ActionApi(actionApiArguments))
+    LibApi(libApiArguments),
+    HelperApi()
+  )
 }
 
 export default Ckan
