@@ -24,7 +24,7 @@ const Ckan = (config) => {
   const baseUrl = config.baseUrl.replace(/\/$/, '')
   const apiUrl = baseUrl + API_URI
 
-  const libApiArguments = Object.assign({}, config, { apiUrl: apiUrl }, { parameters: [] })
+  const libApiArguments = Object.assign({}, config, { apiUrl: apiUrl, parameters: [] })
 
   return Object.assign(
     {},
