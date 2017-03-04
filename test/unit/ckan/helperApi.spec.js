@@ -107,4 +107,43 @@ describe('CKAN Helper Api', () => {
       expect(() => offset(thisConfig)).to.throw(expected)
     })
   })
+
+  describe('function query', () => {
+    it('should throw error if called without arguments', () => {
+      // setup
+      const query = helperApi.query
+
+      // expected value
+      const expected = 'Argument is required and must be of type string'
+
+      // assert
+      expect(() => query()).to.throw(expected)
+    })
+
+    it('should throw error if called with first argument other than string', () => {
+      // setup
+      const query = helperApi.query
+
+      // expected value
+      const expected = 'Argument is required and must be of type string'
+
+      // assert
+      expect(() => query({})).to.throw(expected)
+    })
+
+    it('should add query to parameter list when called correctly', () => {
+      // setup
+      const thisConfig = Object.assign({}, config)
+      const query = helperApi.query('searchString')
+
+      // expected value
+      const expected = {q: 'searchString'}
+
+      // actual value
+      const actual = query(thisConfig).parameters
+
+      // assert
+      expect(actual).to.deep.equal(expected)
+    })
+  })
 })

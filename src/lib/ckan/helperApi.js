@@ -10,7 +10,7 @@ export default () => {
           promise = actionApi.datastoreSearch()
           break
         case 'packages':
-          promise = actionApi.listAllPackages()
+          promise = actionApi.packages()
           break
         default:
           promise = Promise.reject('something went wrong')
@@ -40,6 +40,15 @@ export default () => {
           throw new Error('Offset can only be called after limit has been called')
         }
         const parameters = Object.assign({}, config.parameters, {offset: number})
+        return Object.assign({}, config, {parameters: parameters})
+      }
+    },
+    query (queryString) {
+      if (typeof (queryString) !== 'string') {
+        throw new Error('Argument is required and must be of type string')
+      }
+      return (config) => {
+        const parameters = Object.assign({}, config.parameters, {q: queryString})
         return Object.assign({}, config, {parameters: parameters})
       }
     }

@@ -25,7 +25,8 @@ describe('Library', () => {
     const {
       execute,
       limit,
-      packages
+      packages,
+      query
     } = Ckan({baseUrl: CKAN_HOST})
 
     it('should list all packages', () => {
@@ -69,6 +70,23 @@ describe('Library', () => {
       // assert
       return getPackages()
         .then((result) => expect(Object.keys(result).length).to.equal(expected))
+        .catch((error) => { throw error })
+    })
+
+    it('should return a result based on search query', () => {
+      // setup
+      const getPackages = compose(
+        execute,
+        query('barn'),
+        packages
+      )
+
+      // expected value
+      const expected = 3
+
+      // assert
+      return getPackages()
+        .then((result) => expect(result.count).to.equal(expected))
         .catch((error) => { throw error })
     })
   })
