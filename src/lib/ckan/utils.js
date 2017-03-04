@@ -1,9 +1,9 @@
-export const makeRequests = (makeRequstsArguments) => {
+export const makeRequests = (makeRequestsArguments) => {
   const {
     apiUrl,
     endpoint,
     parameters
-  } = makeRequstsArguments
+  } = makeRequestsArguments
 
   let request = {}
   request.url = apiUrl + endpoint
