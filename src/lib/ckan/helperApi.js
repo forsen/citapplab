@@ -2,6 +2,24 @@ import ActionApi from './actionApi'
 
 export default () => {
   return {
+    execute (config) {
+      const actionApi = ActionApi(config)
+      let promise
+      switch (config.execute) {
+        case 'resources':
+          promise = actionApi.datastoreSearch()
+          break
+        case 'packages':
+          promise = actionApi.listAllPackages()
+          break
+        default:
+          promise = Promise.reject('something went wrong')
+      }
+      return promise
+    },
+    flatten (config) {
+      return config
+    },
     limit (argument) {
       if (typeof (argument) !== 'object') {
         return (config) => {
@@ -24,24 +42,6 @@ export default () => {
         const parameters = Object.assign({}, config.parameters, {offset: number})
         return Object.assign({}, config, {parameters: parameters})
       }
-    },
-    flatten (config) {
-      return config
-    },
-    execute (config) {
-      const actionApi = ActionApi(config)
-      let promise
-      switch (config.execute) {
-        case 'resources':
-          promise = actionApi.datastoreSearch()
-          break
-        case 'packages':
-          promise = actionApi.listAllPackages()
-          break
-        default:
-          promise = Promise.reject('something went wrong')
-      }
-      return promise
     }
   }
 }
