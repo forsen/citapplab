@@ -26,7 +26,7 @@ describe('Library', () => {
       execute,
       limit,
       packages,
-      resources,
+      resource,
       query
     } = Ckan({baseUrl: CKAN_HOST})
 
@@ -101,13 +101,13 @@ describe('Library', () => {
       })
     })
 
-    describe('resources', () => {
-      it('should return all resources', () => {
+    describe('resource', () => {
+      it('should return a resource', () => {
         // setup
         const resourceId = 'd0860282-5301-4b11-8a7c-929d19402193'
         const getResources = compose(
           execute,
-          resources(resourceId)
+          resource(resourceId)
         )
 
         // expected value

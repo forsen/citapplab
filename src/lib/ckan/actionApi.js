@@ -33,8 +33,8 @@ export default (config) => {
         .then(ckanHttpErrorHandler.checkResponse)
         .then(packageParser)
     },
-    datastoreSearch () {
-      return fetchMyData(Object.assign({}, config, { endpoint: 'datastore_search' }))
+    resource () {
+      return fetchMyData(Object.assign({}, config, { endpoint: ENDPOINT.datastore_search }))
         .then(httpErrorHandler.checkResponse)
         .then((response) => response.json())
         .then(ckanHttpErrorHandler.checkResponse)

@@ -28,12 +28,12 @@ describe('CKAN Module tests', () => {
       flatten,
       limit,
       packages,
-      resources
+      resource
     } = Ckan({baseUrl: ''})
     it('execute', () => expect(execute).to.be.a('function'))
     it('flatten', () => expect(flatten).to.be.a('function'))
     it('limit', () => expect(limit).to.be.a('function'))
     it('packages', () => expect(packages).to.be.a('function'))
-    it('resources', () => expect(resources).to.be.a('function'))
+    it('resource', () => expect(resource).to.be.a('function'))
   })
 })

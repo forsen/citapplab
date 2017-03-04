@@ -6,8 +6,8 @@ export default () => {
       const actionApi = ActionApi(config)
       let promise
       switch (config.execute) {
-        case 'resources':
-          promise = actionApi.datastoreSearch()
+        case 'resource':
+          promise = actionApi.resource()
           break
         case 'packages':
           promise = actionApi.packages()

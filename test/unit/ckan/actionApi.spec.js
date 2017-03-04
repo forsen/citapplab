@@ -80,11 +80,11 @@ describe('CKAN ActionApi', () => {
     })
   })
 
-  describe('resources', () => {
-    it('datastoreSearch should return a resolved promise', () => {
+  describe('resource', () => {
+    it('should return a resolved promise', () => {
       const actionApi = ActionApi(config)
 
-      return actionApi.datastoreSearch()
+      return actionApi.resource()
         .then((response) => {
           expect(response).to.be.a('array')
         })

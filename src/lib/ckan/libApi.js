@@ -3,9 +3,12 @@ export default (config) => {
     packages () {
       return Object.assign({}, config, { execute: 'packages' })
     },
-    resources (id) {
+    resource (id) {
+      if (id === undefined) {
+        throw new Error('resource must be called with an argument as string')
+      }
       const execute = {
-        execute: 'resources'
+        execute: 'resource'
       }
       if (typeof (id) === 'string') {
         return () => {
@@ -13,7 +16,7 @@ export default (config) => {
           return Object.assign({}, config, execute, { parameters: parameters })
         }
       }
-      return Object.assign({}, config, { execute: 'resources' })
+      return Object.assign({}, config, execute)
     }
   }
 }
