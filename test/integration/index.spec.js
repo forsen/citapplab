@@ -118,6 +118,22 @@ describe('Library', () => {
           .then((result) => expect(result.resource_id).to.equal(expected))
           .catch((error) => { throw error })
       })
+
+      it('should throw error if no arguments is passed', () => {
+        // setup
+        const getResources = compose(
+          execute,
+          resource
+        )
+
+        // expected value
+        const expected = 'resource must be called with an argument as string'
+
+        // assert
+        return expect(() => {
+          getResources()
+        }).to.throw(expected)
+      })
     })
   })
 })
