@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
-import { expect } from 'chai'
+import {expect} from 'chai'
 
-import citapplab, { compose } from '../../lib/bundle'
+import citapplab, {compose} from '../../lib/bundle'
 
 const {
   Ckan,
@@ -26,68 +26,98 @@ describe('Library', () => {
       execute,
       limit,
       packages,
+      resources,
       query
     } = Ckan({baseUrl: CKAN_HOST})
 
-    it('should list all packages', () => {
-      // setup
-      const getPackages = compose(execute, packages)
+    describe('packages', () => {
+      it('should list all packages', () => {
+        // setup
+        const getPackages = compose(execute, packages)
 
-      // assert
-      return getPackages()
-        .then((result) => expect(Array.isArray(result)).to.be.true)
-        .catch((error) => { throw error })
+        // assert
+        return getPackages()
+          .then((result) => expect(Array.isArray(result)).to.be.true)
+          .catch((error) => {
+            throw error
+          })
+      })
+
+      it('should list first 10 packages', () => {
+        // setup
+        const getPackages = compose(
+          execute,
+          limit(10),
+          packages
+        )
+
+        // expected value
+        const expected = 10
+
+        // assert
+        return getPackages()
+          .then((jsonResult) => expect(Object.keys(jsonResult).length).to.equal(expected))
+          .catch((error) => {
+            throw error
+          })
+      })
+
+      it('should list default limit (5) packages', () => {
+        // setup
+        const getPackages = compose(
+          execute,
+          limit,
+          packages
+        )
+
+        // expected value
+        const expected = 5
+
+        // assert
+        return getPackages()
+          .then((result) => expect(Object.keys(result).length).to.equal(expected))
+          .catch((error) => {
+            throw error
+          })
+      })
+
+      it('should return a result based on search query', () => {
+        // setup
+        const getPackages = compose(
+          execute,
+          query('barn'),
+          packages
+        )
+
+        // expected value
+        const expected = 3
+
+        // assert
+        return getPackages()
+          .then((result) => expect(result.count).to.equal(expected))
+          .catch((error) => {
+            throw error
+          })
+      })
     })
 
-    it('should list first 10 packages', () => {
-      // setup
-      const getPackages = compose(
-        execute,
-        limit(10),
-        packages
-      )
+    describe('resources', () => {
+      it('should return all resources', () => {
+        // setup
+        const resourceId = 'd0860282-5301-4b11-8a7c-929d19402193'
+        const getResources = compose(
+          execute,
+          resources(resourceId)
+        )
 
-      // expected value
-      const expected = 10
+        // expected value
+        const expected = resourceId
 
-      // assert
-      return getPackages()
-        .then((jsonResult) => expect(Object.keys(jsonResult).length).to.equal(expected))
-        .catch((error) => { throw error })
-    })
-
-    it('should list default limit (5) packages', () => {
-      // setup
-      const getPackages = compose(
-        execute,
-        limit,
-        packages
-      )
-
-      // expected value
-      const expected = 5
-
-      // assert
-      return getPackages()
-        .then((result) => expect(Object.keys(result).length).to.equal(expected))
-        .catch((error) => { throw error })
-    })
-
-    it('should return a result based on search query', () => {
-      // setup
-      const getPackages = compose(
-        execute,
-        query('barn'),
-        packages
-      )
-
-      // expected value
-      const expected = 3
-
-      // assert
-      return getPackages()
-        .then((result) => expect(result.count).to.equal(expected))
-        .catch((error) => { throw error })
+        // assert
+        return getResources()
+          .then((result) => expect(result.resource_id).to.equal(expected))
+          .catch((error) => { throw error })
+      })
     })
   })
 })
