@@ -24,11 +24,13 @@ export default () => {
       if (typeof (argument) !== 'object') {
         return (config) => {
           const myArgument = typeof (argument) === 'number' ? argument : 5
-          const parameters = Object.assign({}, config.parameters, {limit: myArgument})
+          const parameter = config.execute === 'packages' ? { rows: myArgument } : { limit: myArgument }
+          const parameters = Object.assign({}, config.parameters, parameter)
           return Object.assign({}, config, {parameters: parameters})
         }
       }
-      const parameters = Object.assign({}, argument.parameters, { limit: 5 })
+      const parameter = argument.execute === 'packages' ? { rows: 5 } : { limit: 5 }
+      const parameters = Object.assign({}, argument.parameters, parameter)
       return Object.assign({}, argument, {parameters: parameters})
     },
     offset (number) {
@@ -39,7 +41,9 @@ export default () => {
         if (!config.parameters.hasOwnProperty('limit')) {
           throw new Error('Offset can only be called after limit has been called')
         }
-        const parameters = Object.assign({}, config.parameters, {offset: number})
+
+        const parameter = config.execute === 'packages' ? { start: number } : { offset: number }
+        const parameters = Object.assign({}, config.parameters, parameter)
         return Object.assign({}, config, {parameters: parameters})
       }
     },

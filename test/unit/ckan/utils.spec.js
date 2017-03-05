@@ -32,7 +32,10 @@ describe('CKAN Utils tests', () => {
   describe('Parsers', () => {
     const response = {
       success: true,
-      result: []
+      result: {
+        results: [],
+        records: []
+      }
     }
 
     const parsers = Parsers()

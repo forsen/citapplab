@@ -94,7 +94,7 @@ describe('Library', () => {
 
         // assert
         return getPackages()
-          .then((result) => expect(result.count).to.equal(expected))
+          .then((result) => expect(Object.keys(result).length).to.equal(expected))
           .catch((error) => {
             throw error
           })
@@ -111,11 +111,11 @@ describe('Library', () => {
         )
 
         // expected value
-        const expected = resourceId
+        const expected = 0
 
         // assert
         return getResources()
-          .then((result) => expect(result.resource_id).to.equal(expected))
+          .then((result) => expect(Object.keys(result).length).to.be.greaterThan(expected))
           .catch((error) => { throw error })
       })
 

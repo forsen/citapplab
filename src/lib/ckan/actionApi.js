@@ -23,11 +23,12 @@ export default (config) => {
   const fetchMyData = compose(dataFetcher.fetch, makeRequests)
   return {
     packages () {
+      /*
       const endpoint = config.parameters.hasOwnProperty('q')
         ? ENDPOINT.package_search
         : ENDPOINT.package_list
-
-      return fetchMyData(Object.assign({}, config, { endpoint: endpoint }))
+      */
+      return fetchMyData(Object.assign({}, config, { endpoint: ENDPOINT.package_search }))
         .then(httpErrorHandler.checkResponse)
         .then((response) => response.json())
         .then(ckanHttpErrorHandler.checkResponse)

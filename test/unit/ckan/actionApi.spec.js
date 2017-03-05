@@ -17,9 +17,12 @@ describe('CKAN ActionApi', () => {
                 error: {
                   message: 'hæ'
                 },
-                result: [
-                  url
-                ]
+                result: {
+                  results: [
+                    url
+                  ],
+                  records: []
+                }
               })
             })
           }
@@ -44,7 +47,7 @@ describe('CKAN ActionApi', () => {
 
       return actionApi.packages()
         .then((response) => {
-          expect(response).to.be.a('array')
+          expect(response).to.be.an('array')
         })
         .catch((error) => {
           throw error
@@ -64,20 +67,6 @@ describe('CKAN ActionApi', () => {
         .then((response) => expect(response[0]).to.equal(expected))
         .catch((error) => { throw error })
     })
-
-    it('should use list endpoint if parameter q is not in parameter list', () => {
-      // setup
-      const thisConfig = Object.assign({}, config)
-      const actionApi = ActionApi(thisConfig)
-
-      // expected value
-      const expected = 'package_list'
-
-      // assert
-      return actionApi.packages()
-        .then((response) => expect(response[0]).to.equal(expected))
-        .catch((error) => { throw error })
-    })
   })
 
   describe('resource', () => {
@@ -86,7 +75,7 @@ describe('CKAN ActionApi', () => {
 
       return actionApi.resource()
         .then((response) => {
-          expect(response).to.be.a('array')
+          expect(response).to.be.an('array')
         })
         .catch((error) => {
           throw error
