@@ -30,12 +30,12 @@ export const Parsers = () => {
   return {
     resourceParser (response) {
       return new Promise((resolve) => {
-        resolve(response.result)
+        resolve(response.result.records)
       })
     },
     packageParser (response) {
       return new Promise((resolve) => {
-        resolve(response.result)
+        resolve(response.result.results)
       })
     }
   }
