@@ -7,6 +7,27 @@ describe('CKAN Helper Api', () => {
     apiUrl: '',
     parameters: []
   }
+  describe('function execute', () => {
+    it('should return a rejected promise if execute attribute is missing from config object', () => {
+      // setup
+      const execute = helperApi.execute(config)
+
+      // assert
+      return execute
+        .then(() => { throw new Error('should not succeed') })
+        .catch((error) => expect(error).to.equal('something went wrong'))
+    })
+    it('should return a rejected promise if passed an unsupported api thing', () => {
+      // setup
+      const thisConfig = Object.assign({}, config, {execute: 'unsupported'})
+      const execute = helperApi.execute(thisConfig)
+
+      // assert
+      return execute
+        .then(() => { throw new Error('should not succeed') })
+        .catch((error) => expect(error).to.equal('something went wrong'))
+    })
+  })
   describe('function limit', () => {
     it('without arguments should set limit to 5', () => {
       // setup
@@ -50,6 +71,21 @@ describe('CKAN Helper Api', () => {
 
       // actual value
       const actual = limit(thisConfig).parameters
+
+      // assert
+      expect(actual).to.deep.equal(expected)
+    })
+
+    it('with object as argument should set limit to 5', () => {
+      // setup
+      const argument = {}
+      const limit = helperApi.limit(argument)
+
+      // expected value
+      const expected = {limit: 5}
+
+      // actual value
+      const actual = limit.parameters
 
       // assert
       expect(actual).to.deep.equal(expected)
