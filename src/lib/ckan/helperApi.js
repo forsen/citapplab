@@ -47,6 +47,15 @@ export default () => {
         return Object.assign({}, config, {parameters: parameters})
       }
     },
+    tag (tag) {
+      if (typeof (tag) !== 'string') {
+        throw new Error('Argument is required and must be of type string')
+      }
+      return (config) => {
+        const parameters = Object.assign({}, config.parameters, {fq: 'tags:' + tag})
+        return Object.assign({}, config, {parameters: parameters})
+      }
+    },
     query (queryString) {
       if (typeof (queryString) !== 'string') {
         throw new Error('Argument is required and must be of type string')
