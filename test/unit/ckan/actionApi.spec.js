@@ -43,9 +43,9 @@ describe('CKAN ActionApi', () => {
 
   describe('packages', () => {
     it('should return a resolved promise', () => {
-      const actionApi = ActionApi(config)
+      const actionApi = ActionApi()
 
-      return actionApi.packages()
+      return actionApi.packages(config)
         .then((response) => {
           expect(response).to.be.an('array')
         })
@@ -57,13 +57,13 @@ describe('CKAN ActionApi', () => {
     it('should use search endpoint if parameter q is in parameter list', () => {
       // setup
       const thisConfig = Object.assign({}, config, { parameters: { q: 'something' } })
-      const actionApi = ActionApi(thisConfig)
+      const actionApi = ActionApi()
 
       // expected value
       const expected = 'package_search?q=something'
 
       // assert
-      return actionApi.packages()
+      return actionApi.packages(thisConfig)
         .then((response) => expect(response[0]).to.equal(expected))
         .catch((error) => { throw error })
     })
@@ -71,9 +71,9 @@ describe('CKAN ActionApi', () => {
 
   describe('resource', () => {
     it('should return a resolved promise', () => {
-      const actionApi = ActionApi(config)
+      const actionApi = ActionApi()
 
-      return actionApi.resource()
+      return actionApi.resource(config)
         .then((response) => {
           expect(response).to.be.an('array')
         })

@@ -14,7 +14,7 @@ const ENDPOINT = {
   datastore_search: 'datastore_search'
 }
 
-export default (config) => {
+export default () => {
   const {
     resourceParser,
     packageParser
@@ -22,19 +22,14 @@ export default (config) => {
 
   const fetchMyData = compose(dataFetcher.fetch, makeRequests)
   return {
-    packages () {
-      /*
-      const endpoint = config.parameters.hasOwnProperty('q')
-        ? ENDPOINT.package_search
-        : ENDPOINT.package_list
-      */
+    packages (config) {
       return fetchMyData(Object.assign({}, config, { endpoint: ENDPOINT.package_search }))
         .then(httpErrorHandler.checkResponse)
         .then((response) => response.json())
         .then(ckanHttpErrorHandler.checkResponse)
         .then(packageParser)
     },
-    resource () {
+    resource (config) {
       return fetchMyData(Object.assign({}, config, { endpoint: ENDPOINT.datastore_search }))
         .then(httpErrorHandler.checkResponse)
         .then((response) => response.json())

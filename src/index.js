@@ -1,6 +1,6 @@
 import Ngsi from './lib/ngsi'
 import Ckan from './lib/ckan'
-import { compose } from './lib/utils'
+import { compose, pipe } from './lib/utils'
 
 const citapplab = {
   Ckan,
@@ -8,7 +8,8 @@ const citapplab = {
 }
 
 export {
-  compose
+  compose,
+  pipe
 }
 
 export default citapplab

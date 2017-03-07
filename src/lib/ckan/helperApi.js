@@ -1,35 +1,19 @@
-import ActionApi from './actionApi'
 
-export default () => {
+export default (initialConfig) => {
   return {
-    execute (config) {
-      const actionApi = ActionApi(config)
-      let promise
-      switch (config.execute) {
-        case 'resource':
-          promise = actionApi.resource()
-          break
-        case 'packages':
-          promise = actionApi.packages()
-          break
-        default:
-          promise = Promise.reject('something went wrong')
-      }
-      return promise
-    },
-    flatten (config) {
+    flatten (config = initialConfig) {
       return config
     },
-    limit (argument) {
+    limit (argument = initialConfig) {
       if (typeof (argument) !== 'object') {
-        return (config) => {
+        return (config = initialConfig) => {
           const myArgument = typeof (argument) === 'number' ? argument : 5
-          const parameter = config.execute === 'packages' ? { rows: myArgument } : { limit: myArgument }
+          const parameter = { limit: myArgument }
           const parameters = Object.assign({}, config.parameters, parameter)
           return Object.assign({}, config, {parameters: parameters})
         }
       }
-      const parameter = argument.execute === 'packages' ? { rows: 5 } : { limit: 5 }
+      const parameter = { limit: 5 }
       const parameters = Object.assign({}, argument.parameters, parameter)
       return Object.assign({}, argument, {parameters: parameters})
     },
@@ -37,7 +21,7 @@ export default () => {
       if (typeof (number) !== 'number') {
         throw new Error('Argument is required and must be of type number')
       }
-      return (config) => {
+      return (config = initialConfig) => {
         if (!config.parameters.hasOwnProperty('limit')) {
           throw new Error('Offset can only be called after limit has been called')
         }
@@ -51,7 +35,7 @@ export default () => {
       if (typeof (tag) !== 'string') {
         throw new Error('Argument is required and must be of type string')
       }
-      return (config) => {
+      return (config = initialConfig) => {
         const parameters = Object.assign({}, config.parameters, {fq: 'tags:' + tag})
         return Object.assign({}, config, {parameters: parameters})
       }
@@ -60,7 +44,7 @@ export default () => {
       if (typeof (queryString) !== 'string') {
         throw new Error('Argument is required and must be of type string')
       }
-      return (config) => {
+      return (config = initialConfig) => {
         const parameters = Object.assign({}, config.parameters, {q: queryString})
         return Object.assign({}, config, {parameters: parameters})
       }

@@ -24,13 +24,11 @@ describe('CKAN Module tests', () => {
   })
   describe('CKAN should expose the following functions', () => {
     const {
-      execute,
       flatten,
       limit,
       packages,
       resource
     } = Ckan({baseUrl: ''})
-    it('execute', () => expect(execute).to.be.a('function'))
     it('flatten', () => expect(flatten).to.be.a('function'))
     it('limit', () => expect(limit).to.be.a('function'))
     it('packages', () => expect(packages).to.be.a('function'))

@@ -1,22 +1,32 @@
-export default (config) => {
+import ActionApi from './actionApi'
+
+export default (initialConfig) => {
+  const actionApi = ActionApi()
   return {
-    packages () {
-      return Object.assign({}, config, { execute: 'packages' })
+    packages (config = initialConfig) {
+      const thisConfig = Object.assign({}, config, {
+        parameters: Object.keys(config.parameters).reduce((result, key) => {
+          if (key === 'limit') {
+            result['rows'] = config.parameters['limit']
+          } else if (key === 'offset') {
+            result['start'] = config.parameters['offset']
+          } else {
+            result[key] = config.parameters[key]
+          }
+          return result
+        }, {})
+      })
+      return actionApi.packages(thisConfig)
     },
     resource (id) {
-      if (id === undefined) {
+      if (typeof (id) !== 'string') {
         throw new Error('resource must be called with an argument as string')
       }
-      const execute = {
-        execute: 'resource'
+      return (config = initialConfig) => {
+        const parameters = Object.assign({}, config.parameters, { id: id })
+        const thisConfig = Object.assign({}, config, { parameters: parameters })
+        return actionApi.resource(thisConfig)
       }
-      if (typeof (id) === 'string') {
-        return () => {
-          const parameters = Object.assign({}, config.parameters, { id: id })
-          return Object.assign({}, config, execute, { parameters: parameters })
-        }
-      }
-      return Object.assign({}, config, execute)
     }
   }
 }

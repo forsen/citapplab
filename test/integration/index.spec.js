@@ -23,7 +23,6 @@ describe('Library', () => {
 
   describe('CKAN', () => {
     const {
-      execute,
       limit,
       packages,
       resource,
@@ -33,7 +32,7 @@ describe('Library', () => {
     describe('packages', () => {
       it('should list all packages', () => {
         // setup
-        const getPackages = compose(execute, packages)
+        const getPackages = compose(packages)
 
         // assert
         return getPackages()
@@ -46,9 +45,8 @@ describe('Library', () => {
       it('should list first 10 packages', () => {
         // setup
         const getPackages = compose(
-          execute,
-          limit(10),
-          packages
+          packages,
+          limit(10)
         )
 
         // expected value
@@ -65,9 +63,8 @@ describe('Library', () => {
       it('should list default limit (5) packages', () => {
         // setup
         const getPackages = compose(
-          execute,
-          limit,
-          packages
+          packages,
+          limit
         )
 
         // expected value
@@ -84,9 +81,8 @@ describe('Library', () => {
       it('should return a result based on search query', () => {
         // setup
         const getPackages = compose(
-          execute,
-          query('barn'),
-          packages
+          packages,
+          query('barn')
         )
 
         // expected value
@@ -106,7 +102,6 @@ describe('Library', () => {
         // setup
         const resourceId = 'd0860282-5301-4b11-8a7c-929d19402193'
         const getResources = compose(
-          execute,
           resource(resourceId)
         )
 
@@ -122,7 +117,6 @@ describe('Library', () => {
       it('should throw error if no arguments is passed', () => {
         // setup
         const getResources = compose(
-          execute,
           resource
         )
 
