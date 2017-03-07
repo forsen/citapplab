@@ -19,10 +19,18 @@ export default (initialConfig) => {
       return actionApi.packages(thisConfig)
     },
     resource (id) {
-      if (typeof (id) !== 'string') {
-        throw new Error('resource must be called with an argument as string')
+      if (typeof (id) !== 'string' && !Array.isArray(id)) {
+        throw new Error('resource must be called with an argument as string or array of strings')
       }
       return (config = initialConfig) => {
+        if (Array.isArray(id)) {
+          const promises = id.map((item) => {
+            const parameters = Object.assign({}, config.parameters, { id: item })
+            const thisConfig = Object.assign({}, config, { parameters: parameters })
+            return actionApi.resource(thisConfig)
+          })
+          return Promise.all(promises)
+        }
         const parameters = Object.assign({}, config.parameters, { id: id })
         const thisConfig = Object.assign({}, config, { parameters: parameters })
         return actionApi.resource(thisConfig)
