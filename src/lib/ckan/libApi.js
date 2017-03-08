@@ -1,9 +1,17 @@
 import ActionApi from './actionApi'
 
+const checkConfig = (config) => {
+  return config ? '' : 'config is undefined'
+}
+
 export default (initialConfig) => {
   const actionApi = ActionApi()
   return {
     packages (config = initialConfig) {
+      const errorString = checkConfig(config)
+      if (errorString) {
+        return Promise.reject(errorString)
+      }
       const thisConfig = Object.assign({}, config, {
         parameters: Object.keys(config.parameters).reduce((result, key) => {
           if (key === 'limit') {
@@ -23,6 +31,12 @@ export default (initialConfig) => {
         throw new Error('resource must be called with an argument as string or array of strings')
       }
       return (config = initialConfig) => {
+        const errorString = checkConfig(config)
+        if (errorString) {
+          console.log('neid')
+          return Promise.reject(errorString)
+        }
+
         if (Array.isArray(id)) {
           const promises = id.map((item) => {
             const parameters = Object.assign({}, config.parameters, { id: item })

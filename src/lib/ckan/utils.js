@@ -25,18 +25,3 @@ export const makeRequests = (makeRequestsArguments) => {
 
   return request
 }
-
-export const Parsers = () => {
-  return {
-    resourceParser (response) {
-      return new Promise((resolve) => {
-        resolve(response.result.records)
-      })
-    },
-    packageParser (response) {
-      return new Promise((resolve) => {
-        resolve(response.result.results)
-      })
-    }
-  }
-}

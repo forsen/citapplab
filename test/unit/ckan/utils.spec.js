@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { makeRequests, Parsers } from '../../../src/lib/ckan/utils'
+import { makeRequests } from '../../../src/lib/ckan/utils'
 
 describe('CKAN Utils tests', () => {
   describe('MakeRequests', () => {
@@ -26,32 +26,6 @@ describe('CKAN Utils tests', () => {
       const request = makeRequests(config)
       expect(request.options.method).to.equal('GET')
       expect(request.options.headers).to.deep.equal({'Accept': 'application/json'})
-    })
-  })
-
-  describe('Parsers', () => {
-    const response = {
-      success: true,
-      result: {
-        results: [],
-        records: []
-      }
-    }
-
-    const parsers = Parsers()
-
-    it('resourceParser should return a resolved promise', () => {
-      return parsers.resourceParser(response)
-        .then((jsonResponse) => {
-          expect(jsonResponse).to.be.an('array')
-        })
-    })
-
-    it('packageParser should return a resolved promise', () => {
-      return parsers.packageParser(response)
-        .then((jsonResponse) => {
-          expect(jsonResponse).to.be.an('array')
-        })
     })
   })
 })

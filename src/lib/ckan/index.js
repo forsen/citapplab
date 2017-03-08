@@ -2,6 +2,7 @@ import { DefaultErrorCodes } from '../utils'
 import CkanError from './ckanErrorCodes'
 import LibApi from './libApi'
 import HelperApi from './helperApi'
+import ParserApi from './parserApi'
 
 const API_URI = '/api/3/action/'
 
@@ -29,7 +30,8 @@ const Ckan = (config) => {
   return Object.assign(
     {},
     LibApi(initialConfig),
-    HelperApi(initialConfig)
+    HelperApi(initialConfig),
+    {parsers: ParserApi(initialConfig)}
   )
 }
 
