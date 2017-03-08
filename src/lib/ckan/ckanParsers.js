@@ -34,27 +34,30 @@ export default () => {
         resolve(response.result.records)
       })
     },
-    resourceGetWithValidLocation (response) {
-      const result = response.result.records.reduce((acc, record) => {
-        record.Latitude = parseFloat(record.Latitude)
-        record.Longitude = parseFloat(record.Longitude)
+    resourceGetWithValidLocation (config) {
+      const latitude = config.latitude || 'Latitude'
+      const longitude = config.longitude || 'Longitude'
+      return (response) => {
+        const result = response.result.records.reduce((acc, record) => {
+          record.latitude = parseFloat(record[latitude])
+          record.longitude = parseFloat(record[longitude])
 
-        if (
-          record.Latitude !== record.Latitude ||
-          record.Longitude !== record.Longitude ||
-          record.Latitude === 0 ||
-          record.Longitude === 0
-        ) {
+          if (
+            record.latitude !== record.latitude ||
+            record.longitude !== record.longitude ||
+            record.latitude === 0 ||
+            record.longitude === 0
+          ) {
+            return acc
+          }
+          acc.push(record)
           return acc
-        }
-        acc.push(record)
-        return acc
-      }, [])
+        }, [])
 
-      console.log(result)
-      return new Promise((resolve) => {
-        resolve(result)
-      })
+        return new Promise((resolve) => {
+          resolve(result)
+        })
+      }
     }
   }
 }

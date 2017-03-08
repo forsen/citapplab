@@ -40,7 +40,7 @@ const execute = (config) => {
       parser = resourceDefault
       break
     case parserConstants.RESOURCE_GET_WITH_VALID_LOCATION:
-      parser = resourceGetWithValidLocation
+      parser = resourceGetWithValidLocation(config)
       break
     default:
       throw new Error('no parser was found')
