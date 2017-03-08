@@ -1,7 +1,9 @@
 import ActionApi from './actionApi'
 
 const checkConfig = (config) => {
-  return config ? '' : 'config is undefined'
+  if (config.error) {
+    return config.error
+  }
 }
 
 export default (initialConfig) => {

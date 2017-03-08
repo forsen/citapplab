@@ -11,7 +11,8 @@ const {
   packageDefault,
   packageGetResources,
   raw,
-  resourceDefault
+  resourceDefault,
+  resourceGetWithValidLocation
 } = Parsers()
 
 const ENDPOINT = {
@@ -28,19 +29,18 @@ const execute = (config) => {
   switch (config.parser) {
     case parserConstants.PACKAGE_DEFAULT:
       parser = packageDefault
-      console.log('default package')
       break
     case parserConstants.PACKAGE_GET_RESOURCES:
       parser = packageGetResources
-      console.log('get resource parces')
       break
     case parserConstants.RAW:
       parser = raw
-      console.log('rawshit')
       break
     case parserConstants.RESOURCE_DEFAULT:
       parser = resourceDefault
-      console.log('default resource')
+      break
+    case parserConstants.RESOURCE_GET_WITH_VALID_LOCATION:
+      parser = resourceGetWithValidLocation
       break
     default:
       throw new Error('no parser was found')
