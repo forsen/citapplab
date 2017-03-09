@@ -8,7 +8,6 @@ export const constants = {
 export default () => {
   return {
     packageGetResources (response) {
-      console.log(response)
       const resourceArray = response.result.results.reduce((resources, ckanPackage) => {
         ckanPackage.resources.forEach((resource) => {
           resources.push(resource.id)
@@ -53,7 +52,6 @@ export default () => {
           acc.push(record)
           return acc
         }, [])
-
         return new Promise((resolve) => {
           resolve(result)
         })

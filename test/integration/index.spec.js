@@ -113,7 +113,7 @@ describe('Library', () => {
           .then((result) => expect(Object.keys(result).length).to.be.greaterThan(expected))
           .catch((error) => { throw error })
       })
-
+/*
       it('should throw error if no arguments is passed', () => {
         // setup
         const getResources = compose(
@@ -127,7 +127,7 @@ describe('Library', () => {
         return expect(() => {
           getResources()
         }).to.throw(expected)
-      })
+      }) */
     })
   })
 })

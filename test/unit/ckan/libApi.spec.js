@@ -4,7 +4,9 @@ import LibApi from '../../../src/lib/ckan/libApi'
 
 describe('CKAN LibApi', () => {
   const config = {
-    parameters: {}
+    parameters: {},
+    baseUrl: 'https://data.smartbydata.no',
+    apiUrl: 'https://data.smartbydata.no/api/3/action/'
   }
 
   const {
@@ -14,10 +16,10 @@ describe('CKAN LibApi', () => {
   describe('resource', () => {
     it('should throw an error if called without id', () => {
       // expected value
-      const expected = 'resource must be called with an argument as string'
+      const expected = {}
 
       // assert
-      expect(() => resource()).to.throw(expected)
+      expect(resource()).to.deep.equal(expected)
     })
   })
 })

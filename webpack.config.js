@@ -16,13 +16,11 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        use: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: path.resolve(__dirname, 'node_modules'),
+        use: [
+          'babel-loader',
+          'eslint-loader'
+        ]
       }
     ]
   }
