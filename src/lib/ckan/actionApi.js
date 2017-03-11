@@ -2,6 +2,9 @@ import { compose, DataFetcher, HTTPErrorHandler } from '../utils'
 import CkanHTTPErrorHandler from './ckanHttpErrorHandler'
 import { makeRequests } from './utils'
 import Parsers, { constants as parserConstants } from './ckanParsers'
+import ConfigUtils from './configurationUtils'
+
+const {checkConfiguration} = ConfigUtils()
 
 const httpErrorHandler = HTTPErrorHandler()
 const ckanHttpErrorHandler = CkanHTTPErrorHandler()
@@ -15,7 +18,7 @@ const {
   resourceGetWithValidLocation
 } = Parsers()
 
-const ENDPOINT = {
+export const ENDPOINT = {
   package_list: 'package_list',
   current_package_list_with_resources: 'current_package_list_with_resources',
   package_search: 'package_search',
@@ -61,7 +64,11 @@ export default () => {
         { parser: config.parser || parserConstants.PACKAGE_DEFAULT },
         { endpoint: ENDPOINT.package_search }
       )
-      return execute(thisConfig)
+      const verifiedConfiguration = checkConfiguration(thisConfig)
+      if (verifiedConfiguration.error) {
+        return Promise.reject(new Error(verifiedConfiguration.error))
+      }
+      return execute(verifiedConfiguration)
     },
     resource (config) {
       const thisConfig = Object.assign(
@@ -70,7 +77,11 @@ export default () => {
         { parser: config.parser || parserConstants.RESOURCE_DEFAULT },
         { endpoint: ENDPOINT.datastore_search }
       )
-      return execute(thisConfig)
+      const verifiedConfiguration = checkConfiguration(thisConfig)
+      if (verifiedConfiguration.error) {
+        return Promise.reject(new Error(verifiedConfiguration.error))
+      }
+      return execute(verifiedConfiguration)
     }
   }
 }
